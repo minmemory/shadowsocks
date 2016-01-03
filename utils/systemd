@@ -1,0 +1,11 @@
+[Unit]
+Description=Start or stop the Shadowsocks R server
+After=network.target
+Wants=network.target
+[Service]
+Type=forking
+PIDFile=/var/run/shadowsocks.pid
+ExecStart=/usr/bin/python /usr/local/shadowsocks/server.py --pid-file /var/run/shadowsocks.pid -c /etc/shadowsocks.json -d start
+ExecStop=/usr/bin/python /usr/local/shadowsocks/server.py --pid-file /var/run/shadowsocks.pid -c /etc/shadowsocks.json -d stop
+[Install]
+WantedBy=multi-user.target 
